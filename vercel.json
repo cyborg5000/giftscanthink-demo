@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/energiasg", "destination": "/energiasg/index.html" },
+    { "source": "/energiasg/(.*)", "destination": "/energiasg/$1" }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}

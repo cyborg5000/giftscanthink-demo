@@ -41,4 +41,18 @@ When creating a new client demo from a PRD:
 
 ## Deployment
 
-Demos are deployed to subdomains/paths under `demo.giftsthatthink.com`.
+Demos are deployed to Vercel at `demo.giftsthatthink.com`.
+
+### Vercel Configuration
+
+The repository includes a `vercel.json` file that handles routing for all demo folders. When adding a new demo:
+
+1. Add the demo folder to the repository
+2. Update `vercel.json` to include routing rules for the new demo:
+   ```json
+   { "source": "/demoname", "destination": "/demoname/index.html" },
+   { "source": "/demoname/(.*)", "destination": "/demoname/$1" }
+   ```
+3. Commit and push - Vercel will auto-deploy
+
+Each demo will be accessible at: `demo.giftsthatthink.com/demoname`
