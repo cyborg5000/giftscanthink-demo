@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energia Sleep Coach - Better Sleep Starts Here</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <img src="images/Energia-Logo.png" alt="Energia" class="logo">
+            <nav>
+                <a href="#" class="nav-link" onclick="showPage('home')">Home</a>
+                <a href="#" class="nav-link" onclick="showPage('dashboard')">Dashboard</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Transform Your Sleep Quality</h1>
+                <p class="subtitle">Track your sleep, get personalized supplement recommendations, and wake up refreshed every day</p>
+                <button class="cta-button" onclick="showQuiz()">Check Your Sleep Score</button>
+            </div>
+        </section>
+
+        <!-- Sleep Assessment Quiz -->
+        <section id="quiz-section" class="quiz-section hidden">
+            <div class="container">
+                <h2>Quick Sleep Assessment</h2>
+                <form id="sleep-quiz" onsubmit="handleQuiz(event)">
+                    <div class="quiz-question">
+                        <label>How many hours did you sleep last night?</label>
+                        <input type="number" id="hours" min="0" max="24" step="0.5" required>
+                    </div>
+
+                    <div class="quiz-question">
+                        <label>Rate your sleep quality (1-10)</label>
+                        <input type="range" id="quality" min="1" max="10" value="5" oninput="updateQualityValue(this.value)">
+                        <span id="quality-value">5</span>
+                    </div>
+
+                    <div class="quiz-question">
+                        <label>What are your main sleep issues? (Select all that apply)</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="issues" value="cant_fall_asleep"> Can't fall asleep</label>
+                            <label><input type="checkbox" name="issues" value="wake_up_often"> Wake up often during night</label>
+                            <label><input type="checkbox" name="issues" value="not_refreshed"> Don't feel refreshed in morning</label>
+                            <label><input type="checkbox" name="issues" value="stress"> Stress/anxiety</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <label>How do you feel today?</label>
+                        <select id="mood" required>
+                            <option value="">Select...</option>
+                            <option value="energized">Energized</option>
+                            <option value="good">Good</option>
+                            <option value="okay">Okay</option>
+                            <option value="tired">Tired</option>
+                            <option value="exhausted">Exhausted</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-button">Get Your Sleep Protocol</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="results-section hidden">
+            <div class="container">
+                <div class="sleep-score-card">
+                    <h2>Your Sleep Score</h2>
+                    <div class="score-display" id="sleep-score">--</div>
+                    <p id="score-message"></p>
+                </div>
+
+                <div class="protocol-card">
+                    <h3>Your Personalized Protocol</h3>
+                    <div id="supplement-recommendations"></div>
+                </div>
+
+                <button class="cta-button" onclick="showPage('dashboard')">Start Tracking Your Sleep</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboard-page" class="page">
+        <div class="container">
+            <h2>Your Sleep Dashboard</h2>
+
+            <!-- Quick Log Form -->
+            <div class="log-card">
+                <h3>Log Today's Sleep</h3>
+                <form id="daily-log" onsubmit="handleDailyLog(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Hours Slept</label>
+                            <input type="number" id="log-hours" min="0" max="24" step="0.5" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Quality (1-10)</label>
+                            <input type="number" id="log-quality" min="1" max="10" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mood</label>
+                            <select id="log-mood" required>
+                                <option value="energized">Energized</option>
+                                <option value="good">Good</option>
+                                <option value="okay">Okay</option>
+                                <option value="tired">Tired</option>
+                                <option value="exhausted">Exhausted</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="took-supplements">
+                            I took my supplements yesterday
+                        </label>
+                    </div>
+                    <button type="submit" class="submit-button">Log Sleep</button>
+                </form>
+            </div>
+
+            <!-- Sleep Trend Chart -->
+            <div class="chart-card">
+                <h3>7-Day Sleep Trend</h3>
+                <canvas id="sleep-chart"></canvas>
+            </div>
+
+            <!-- Current Protocol -->
+            <div class="protocol-display">
+                <h3>Your Current Protocol</h3>
+                <div id="current-protocol"></div>
+            </div>
+
+            <!-- Insights -->
+            <div class="insights-card">
+                <h3>Quick Win Insights</h3>
+                <div id="insights"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
